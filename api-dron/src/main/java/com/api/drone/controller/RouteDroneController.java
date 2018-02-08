@@ -26,7 +26,7 @@ public class RouteDroneController {
 			@PathParam("coordinateY") String coordinateY, @PathParam("range") String range){
 		ResponseEntity<List<ResidentialModel>> responseListEntity = null;
 		try {
-			
+			responseListEntity = new ResponseEntity<List<ResidentialModel>>(new ArrayList<ResidentialModel>(),  HttpStatus.OK);
 		} catch (Exception exception) {
 			log.error(exception);
 			responseListEntity = new ResponseEntity<List<ResidentialModel>>(new ArrayList<ResidentialModel>(),  HttpStatus.INTERNAL_SERVER_ERROR);
