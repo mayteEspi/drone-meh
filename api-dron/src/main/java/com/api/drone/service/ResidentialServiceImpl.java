@@ -15,7 +15,7 @@ public class ResidentialServiceImpl implements ResidentialService {
 	
 	@Override
 	public List<ResidentialModel> getResidentialsByPositionDrone(String x, String y, String range){
-		List<ResidentialModel>  residentials = null;
+		List<ResidentialModel> residentials = null;
 		try {
 			
 		}catch (Exception e) {
