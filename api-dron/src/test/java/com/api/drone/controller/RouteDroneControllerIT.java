@@ -29,7 +29,6 @@ public class RouteDroneControllerIT {
 	@LocalServerPort
 	private int port;
 	
-
 	private TestRestTemplate restTemplate ;
 	private HttpEntity<String> requestEntity;
 	private HttpHeaders headers ;
