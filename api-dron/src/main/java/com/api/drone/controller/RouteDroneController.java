@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.drone.model.ResidentialModel;
 import com.api.drone.service.ResidentialService;
 
 import javax.websocket.server.PathParam;
@@ -27,19 +26,20 @@ public class RouteDroneController {
 	private ResidentialService residentialService;
 	
 	@GetMapping("/residentials")
-	public ResponseEntity<List<ResidentialModel>> listadoEmpleados(@PathParam("coordinateX") String coordinateX, 
+	public ResponseEntity<List<String>> listadoEmpleados(@PathParam("coordinateX") String coordinateX, 
 			@PathParam("coordinateY") String coordinateY, @PathParam("range") String range){
-		ResponseEntity<List<ResidentialModel>> responseListEntity = null;
+		ResponseEntity<List<String>> responseListEntity = null;
 		try {
-			List<ResidentialModel> residentials = residentialService.getResidentialsByPositionDrone(coordinateX, coordinateY, range);
+			List<String> residentials = residentialService.getResidentialsByPositionDrone(Double.parseDouble(coordinateX),
+					 Double.parseDouble(coordinateY), Integer.parseInt(range));
 			if(residentials != null) {
-				responseListEntity = new ResponseEntity<List<ResidentialModel>>(residentials,  HttpStatus.OK);
+				responseListEntity = new ResponseEntity<List<String>>(residentials,  HttpStatus.OK);
 			}else {
-				responseListEntity = new ResponseEntity<List<ResidentialModel>>(residentials,  HttpStatus.NO_CONTENT);
+				responseListEntity = new ResponseEntity<List<String>>(residentials,  HttpStatus.NO_CONTENT);
 			}
 		} catch (Exception exception) {
 			log.error(exception);
-			responseListEntity = new ResponseEntity<List<ResidentialModel>>(new ArrayList<ResidentialModel>(),  HttpStatus.INTERNAL_SERVER_ERROR);
+			responseListEntity = new ResponseEntity<>(new ArrayList<>(),  HttpStatus.BAD_REQUEST);
 		}
 		return responseListEntity;
 	}
