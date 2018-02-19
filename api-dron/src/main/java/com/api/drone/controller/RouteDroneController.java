@@ -3,6 +3,8 @@ package com.api.drone.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.drone.service.ResidentialService;
-
-import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/route")

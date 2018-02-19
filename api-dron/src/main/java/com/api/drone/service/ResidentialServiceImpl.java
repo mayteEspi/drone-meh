@@ -1,5 +1,6 @@
 package com.api.drone.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Component;
 import com.api.drone.enums.DroneDirectionEnum;
 import com.api.drone.model.PositionDroneModel;
 
-
 @Component
 public class ResidentialServiceImpl implements ResidentialService {
 
@@ -23,21 +23,20 @@ public class ResidentialServiceImpl implements ResidentialService {
 	
 	@Override
 	public List<String> getResidentialsByPositionDrone(double x, double y, int range){
-		List<String> residentialCodes = null;
+		Set<String> residentials = new HashSet<>();
 		try {
-			Set<String> residentials = new HashSet<>();
 			String idCenter = residentialDriver.getIdResidential(x, y);
 			PositionDroneModel position = new PositionDroneModel(
 					getResidentialForRangeAndDirectionFromId(residentials, idCenter, range, DroneDirectionEnum.UP),
 					getResidentialForRangeAndDirectionFromId(residentials, idCenter, range, DroneDirectionEnum.DOWN),
 					getResidentialForRangeAndDirectionFromId(residentials, idCenter, range, DroneDirectionEnum.LEFT),
 					getResidentialForRangeAndDirectionFromId(residentials, idCenter, range, DroneDirectionEnum.RIGHT));
-			setAllResidentialsReForRangeAndDirectionFromId(residentials,idCenter,range,position);
+			getAllResidentialsByPosition(residentials,range,position);
 		}catch (Exception e) {
 			log.error("Errpr calling getResidentialsByPositionDrone: " + e.getMessage());
 			throw e;
 		}
-		return residentialCodes;
+		return new ArrayList<String>(residentials);
 	}
 
 	private String getResidentialForRangeAndDirectionFromId(Set<String> residentials, String idResidential, int range, DroneDirectionEnum up) {
@@ -49,21 +48,25 @@ public class ResidentialServiceImpl implements ResidentialService {
 	     return codeDirection;
 	}
 	
-	private void setAllResidentialsReForRangeAndDirectionFromId(Set<String> residentials, String idCenter, int range, PositionDroneModel position) {
-		residentials.addAll(getResidentialsByPosition(idCenter,range, position.getDown()));
-		residentials.addAll(getResidentialsByPosition(idCenter,range, position.getUp()));
-		residentials.addAll(getResidentialsByPosition(idCenter,range, position.getRight()));
-		residentials.addAll(getResidentialsByPosition(idCenter,range, position.getLeft()));
+	private void getAllResidentialsByPosition(Set<String> residentials, int range, PositionDroneModel position) {
+		residentials.addAll(getAllResidentialForRangeAndDirectionFromId(position.getUp(), range, DroneDirectionEnum.LEFT));
+		residentials.addAll(getAllResidentialForRangeAndDirectionFromId(position.getUp(), range, DroneDirectionEnum.RIGHT));
+		residentials.addAll(getAllResidentialForRangeAndDirectionFromId(position.getDown(), range, DroneDirectionEnum.LEFT));
+        residentials.addAll(getAllResidentialForRangeAndDirectionFromId(position.getDown(), range, DroneDirectionEnum.RIGHT));
+        residentials.addAll(getAllResidentialForRangeAndDirectionFromId(position.getLeft(), range, DroneDirectionEnum.UP));
+        residentials.addAll(getAllResidentialForRangeAndDirectionFromId(position.getLeft(), range, DroneDirectionEnum.DOWN));
+        residentials.addAll(getAllResidentialForRangeAndDirectionFromId(position.getRight(), range, DroneDirectionEnum.UP));
+        residentials.addAll(getAllResidentialForRangeAndDirectionFromId(position.getRight(), range, DroneDirectionEnum.DOWN));
 	}
 	
-	private Set<String> getResidentialsByPosition(String idResidential,int range, String position){
-		Set<String> urbs = new HashSet<>();
-		 String codeDirection = idResidential;
+	private Set<String> getAllResidentialForRangeAndDirectionFromId(String residential,int range, DroneDirectionEnum position){
+		Set<String> residentials = new HashSet<>();
+		 String codeDirection = residential;
 		for (int i = 0; i < range; i++) {
-			codeDirection = residentialDriver.getNearbyResidential(codeDirection, position);
-			urbs.add(codeDirection);
+			codeDirection = residentialDriver.getNearbyResidential(codeDirection, position.name());
+			residentials.add(codeDirection);
 	    }
-	    return urbs;
+	    return residentials;
 	}
 	
 
