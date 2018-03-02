@@ -1,4 +1,4 @@
-package com.api.drone.service;
+package com.meh.api.drone.service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,8 +10,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.api.drone.enums.DroneDirectionEnum;
-import com.api.drone.model.PositionDroneModel;
+import com.meh.api.drone.enums.DroneDirectionEnum;
+import com.meh.api.drone.model.PositionDroneModel;
 
 @Component
 public class ResidentialServiceImpl implements ResidentialService {

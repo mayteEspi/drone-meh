@@ -1,4 +1,4 @@
-package com.api.drone.enums;
+package com.meh.api.drone.enums;
 
 public enum DroneDirectionEnum {
 	  UP,DOWN,RIGHT,LEFT

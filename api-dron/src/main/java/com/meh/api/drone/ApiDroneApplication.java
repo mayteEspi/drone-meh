@@ -1,4 +1,4 @@
-package com.api.drone;
+package com.meh.api.drone;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

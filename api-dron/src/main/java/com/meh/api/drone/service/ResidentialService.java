@@ -1,4 +1,4 @@
-package com.api.drone.service;
+package com.meh.api.drone.service;
 
 import java.util.List;
 

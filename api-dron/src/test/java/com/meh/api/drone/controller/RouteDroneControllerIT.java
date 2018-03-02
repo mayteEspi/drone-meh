@@ -1,4 +1,4 @@
-package com.api.drone.controller;
+package com.meh.api.drone.controller;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -20,8 +20,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.api.drone.ApiDroneApplication;
-import com.api.drone.service.ResidentialService;
+import com.meh.api.drone.ApiDroneApplication;
+import com.meh.api.drone.service.ResidentialService;
 
 
 @RunWith(SpringRunner.class)
@@ -38,8 +38,6 @@ public class RouteDroneControllerIT {
 	private HttpEntity<String> requestEntity;
 	private HttpHeaders headers;
 
-   
-	
 	@Before
 	public void setUp() throws Exception {
 		restTemplate = new TestRestTemplate();

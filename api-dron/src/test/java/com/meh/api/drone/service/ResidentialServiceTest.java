@@ -1,4 +1,4 @@
-package com.api.drone.service;
+package com.meh.api.drone.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -14,7 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.api.drone.enums.DroneDirectionEnum;
+import com.meh.api.drone.enums.DroneDirectionEnum;
 
 
 @RunWith(SpringRunner.class)

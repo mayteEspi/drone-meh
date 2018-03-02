@@ -1,4 +1,4 @@
-package com.api.drone.model;
+package com.meh.api.drone.model;
 
 public class PositionDroneModel {
 	
