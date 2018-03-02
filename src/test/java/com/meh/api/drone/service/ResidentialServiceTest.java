@@ -96,7 +96,6 @@ public class ResidentialServiceTest {
 	
 	@TestConfiguration
     static class EmployeeServiceImplTestContextConfiguration {
-  
         @Bean
         public ResidentialService residentialService() {
             return new ResidentialServiceImpl();
